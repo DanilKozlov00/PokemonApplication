@@ -21,7 +21,7 @@ interface PokemonInfoDao {
         @Query("SELECT * FROM POKEMON_ENTITY WHERE id = :id")
         fun getById(id: Int): PokemonInfo
 
-        @Insert
+        @Insert(onConflict = OnConflictStrategy.REPLACE)
         fun insert(pokemon: PokemonInfo)
 
         @Update

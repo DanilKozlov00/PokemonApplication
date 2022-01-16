@@ -82,7 +82,7 @@ class DayPokemonFragment : DialogFragment(R.layout.fragment_day_pokemon) {
             withContext(Dispatchers.Main) {
                 pokemonDayName.text = pokemon.name
                 pokemonWeight.text = "Weight " + pokemon.weight / 10 + "kg"
-                pokemonHeight.text = "Height " + pokemon.height / 10 + "m"
+                pokemonHeight.text = "Height " + (pokemon.height.toDouble() / 10) + "m"
                 pokemonExp.text = "Exp " + pokemon.base_experience
 
                 Glide.with(pokemonDayImage)
@@ -95,7 +95,7 @@ class DayPokemonFragment : DialogFragment(R.layout.fragment_day_pokemon) {
 
 
     private fun randomId(): Int {
-        return (0..1118).random()
+        return (0..898).random()
     }
 
 }

@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.random.Random
 
 
 class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
@@ -32,7 +33,6 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val id =
             if (arguments?.getString(pokemonUrl) != null) {
                 arguments?.getString(pokemonUrl).toString().substringAfter("pokemon")
@@ -41,59 +41,63 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
                 arguments?.getString(pokemonId)?.toInt()
             }
 
-
         if (id != null) {
             getCurrentData(id)
         }
 
-
         val favoriteBtn = view.findViewById<Button>(R.id.favoriteBtn)
-        favoriteBtn.setOnClickListener {
-
-            if (favoriteBtn.text == "FV") {
+        favoriteBtn.setOnClickListener()
+        {
+            if (!pokemon.favorite) {
                 pokemon.favorite = true
-                if (viewModel.getById(pokemon.id) != null) {
-                    viewModel.update(pokemon)
-                } else {
-                    viewModel.insert(pokemon)
-                }
-                favoriteBtn.text = "UF"
+                viewModel.insert(pokemon)
+                favoriteBtn.setBackgroundResource(R.drawable.favorite_star)
             } else {
-                if (pokemon.userParams != null) {
-                    pokemon.favorite = false
-                    viewModel.update(pokemon)
-                } else {
+                pokemon.favorite = false
+                if (pokemon.userParams == null) {
                     viewModel.delete(pokemon)
+                } else {
+                    viewModel.update(pokemon)
                 }
-                favoriteBtn.text = "FV"
+                favoriteBtn.setBackgroundResource(R.drawable.no_favorite_star)
             }
-
         }
 
         val changeButton = view.findViewById<Button>(R.id.changeInfoBtn)
         changeButton.setOnClickListener {
-            if (changeButton.text == "CH") {
-                userParams.visibility = View.VISIBLE
-                userParams.isEnabled = true
-                changeButton.text = "OK"
-            } else {
-                changeButton.text = "CH"
-                pokemon.userParams = userParams.text.toString()
-                if (viewModel.getById(pokemon.id) != null) {
-                    viewModel.update(pokemon)
+            if (userParams.isEnabled) {
+                userParams.isEnabled = false
+                changeButton.setBackgroundResource(R.drawable.edit_icon)
+                if (userParams.text.isEmpty()) {
+                    userParamLayout.visibility = View.GONE
                 } else {
+                    pokemon.userParams = userParams.text.toString()
                     viewModel.insert(pokemon)
                 }
-                userParams.isEnabled = false
+            } else {
+                userParamLayout.visibility = View.VISIBLE
+                userParams.isEnabled = true
+                userParams.isFocusable = true
+
+                changeButton.setBackgroundResource(R.drawable.done_icon)
             }
         }
 
         if (userParams.text.isEmpty()) {
-            userParams.visibility = View.GONE
+            userParamLayout.visibility = View.GONE
         }
 
 
     }
+
+
+    private fun generateStats(pokemonInfo: PokemonInfo) {
+        pokemonInfo.hp = Random.nextInt(300)
+        pokemonInfo.attack = Random.nextInt(300)
+        pokemonInfo.defense = Random.nextInt(300)
+        pokemonInfo.speed = Random.nextInt(300)
+    }
+
 
     @SuppressLint("SetTextI18n")
     private fun getCurrentData(id: Int) {
@@ -115,20 +119,35 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
             if (!init)
                 pokemon = pokemonService.getSinglePokemon(id)
 
+            generateStats(pokemon)
 
             withContext(Dispatchers.Main) {
 
                 if (pokemon.userParams != null) {
-                    userParams.visibility = View.VISIBLE
+                    userParamLayout.visibility = View.VISIBLE
                     userParams.setText(pokemon.userParams)
                 }
                 if (pokemon.favorite) {
-                    favoriteBtn.setText("UF")
+                    favoriteBtn.setBackgroundResource(R.drawable.favorite_star)
                 }
+
+
+
+                progressViewHp.labelText = "${pokemon.hp}/300"
+                progressViewHp.progress = pokemon.hp!!.toFloat()
+                progressViewAtk.labelText = "${pokemon.attack}/300"
+                progressViewAtk.progress = pokemon.attack!!.toFloat()
+                progressViewDef.labelText = "${pokemon.defense}/300"
+                progressViewDef.progress = pokemon.defense!!.toFloat()
+                progressViewSpd.labelText = "${pokemon.speed}/300"
+                progressViewSpd.progress = pokemon.speed!!.toFloat()
+                progressViewExp.labelText = "${pokemon.base_experience}/300"
+                progressViewExp.progress = pokemon.base_experience.toFloat()
+
 
                 pokemonInfoName.text = pokemon.name
                 weight.text = "Weight " + pokemon.weight / 10 + "kg"
-                height.text = "Height " + pokemon.height / 10 + "m"
+                height.text = "Height " + (pokemon.height.toDouble() / 10) + "m"
                 base_experience.text = "Exp " + pokemon.base_experience
 
                 Glide.with(imageInfo)

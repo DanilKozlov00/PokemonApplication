@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
     tools:context="com.example.myapplication.fragment.DayPokemonFragment">
 
 
     <TextView
         android:id="@+id/pokemonDayName"
+        style="@style/TextStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.3"
-        android:textSize="18sp"
-        android:gravity="center"
         android:text="@string/defaultName" />
 
     <ImageView
@@ -22,8 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.8"
-        android:background="@drawable/ic_launcher_background"
-        />
+        android:background="@drawable/all_circle_white_bg" />
 
     <LinearLayout
         android:id="@+id/pokemonDayInfo"
@@ -34,40 +32,38 @@
 
         <TextView
             android:id="@+id/pokemonWeight"
-            android:layout_weight="1"
-            android:textSize="18sp"
-            android:gravity="center"
+            style="@style/TextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
         </TextView>
 
         <TextView
             android:id="@+id/pokemonHeight"
-            android:layout_weight="1"
-            android:textSize="18sp"
-            android:gravity="center"
+            style="@style/TextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
         </TextView>
 
         <TextView
             android:id="@+id/pokemonExp"
-            android:layout_weight="1"
-            android:textSize="18sp"
-            android:gravity="center"
+            style="@style/TextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
         </TextView>
 
-</LinearLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/addToFavoriteBtn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.3"
+        android:background="@color/background"
         android:text="@string/add_to_favorite" />
 </LinearLayout>

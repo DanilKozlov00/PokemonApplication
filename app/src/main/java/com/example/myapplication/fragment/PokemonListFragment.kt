@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Paging.Adapter.FavoritePokemonAdapter
@@ -29,7 +27,6 @@ class PokemonListFragment : Fragment(R.layout.fragment_pokemon_list) {
 
     private lateinit var recyclerViewAdapter: PokemonAdapter
     private lateinit var favoriteViewAdapter: FavoritePokemonAdapter
-
 
     lateinit var myView: View
 
@@ -55,32 +52,37 @@ class PokemonListFragment : Fragment(R.layout.fragment_pokemon_list) {
 
     override fun onStart() {
         super.onStart()
-        initRecyclerView()
-        initViewModel()
-        initFavoriteModel()
+        initPokemonListRecyclerView()
+        initPokemonListViewModel()
+        initFavoriteListRecyclerView()
+        initPokemonListFavoriteModel()
     }
 
 
-    private fun initFavoriteModel() {
-        val viewModel = ViewModelProvider(this).get(PokemonFavoriteViewModel::class.java)
-        favoriteViewAdapter = FavoritePokemonAdapter()
-        favoriteViewAdapter.setOnItemClickListener(object : FavoritePokemonAdapter.onItemClickListener {
-            override fun onItemClick(position: Int) {
-                Toast.makeText(myView.context, "Click on $position", Toast.LENGTH_SHORT)
-                findNavController().navigate(
-                    R.id.action_pokemonList_to_pokemonInfoFragment,
-                    bundleOf(PokemonInfoFragment.pokemonId to favoriteViewAdapter.peek(position)?.id.toString())
-                )
-            }
-        })
+
+    private fun initFavoriteListRecyclerView() {
         fvRecyclerView.apply {
             layoutManager =
                 LinearLayoutManager(myView.context, LinearLayoutManager.HORIZONTAL, false)
             val decoration =
                 DividerItemDecoration(myView.context, DividerItemDecoration.VERTICAL)
             addItemDecoration(decoration)
+
+            favoriteViewAdapter = FavoritePokemonAdapter()
+            favoriteViewAdapter.setOnItemClickListener(object : FavoritePokemonAdapter.onItemClickListener {
+                override fun onItemClick(position: Int) {
+                    findNavController().navigate(
+                        R.id.action_pokemonList_to_pokemonInfoFragment,
+                        bundleOf(PokemonInfoFragment.pokemonId to favoriteViewAdapter.peek(position)?.id.toString())
+                    )
+                }
+            })
+            adapter = favoriteViewAdapter
         }
-        fvRecyclerView.adapter = favoriteViewAdapter
+    }
+
+    private fun initPokemonListFavoriteModel() {
+        val viewModel = ViewModelProvider(this).get(PokemonFavoriteViewModel::class.java)
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.browseFavorite(true).collect {
                 favoriteViewAdapter.submitData(it)
@@ -89,7 +91,7 @@ class PokemonListFragment : Fragment(R.layout.fragment_pokemon_list) {
     }
 
 
-    private fun initRecyclerView() {
+    private fun initPokemonListRecyclerView() {
         recyclerView.apply {
             layoutManager = LinearLayoutManager(myView.context)
             val decoration =
@@ -99,19 +101,17 @@ class PokemonListFragment : Fragment(R.layout.fragment_pokemon_list) {
             recyclerViewAdapter = PokemonAdapter()
             recyclerViewAdapter.setOnItemClickListener(object : PokemonAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
-                    Toast.makeText(myView.context, "Click on $position", Toast.LENGTH_SHORT)
                     findNavController().navigate(
                         R.id.action_pokemonList_to_pokemonInfoFragment,
                         bundleOf(PokemonInfoFragment.pokemonUrl to recyclerViewAdapter.peek(position)?.url)
                     )
                 }
             })
-
             adapter = recyclerViewAdapter
         }
     }
 
-    private fun initViewModel() {
+    private fun initPokemonListViewModel() {
         val viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         lifecycleScope.launchWhenCreated {
             viewModel.getListData().collectLatest {

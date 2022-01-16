@@ -2,32 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/background"
     android:gravity="center"
     android:orientation="horizontal">
 
-    <ImageView android:id="@+id/imageView"
-        android:layout_width="80dp"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
-        android:layout_weight="0.8"
+        android:layout_marginStart="100dp"
+        android:layout_weight="1"
+        android:background="@drawable/all_circle_white_bg" />
 
-        />
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/pokemonName"
+        style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView android:id="@+id/pokemonName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="18sp"
-
-            android:gravity="center"
-            android:textColor="@color/black"/>
-
-    </LinearLayout>
+        android:gravity="start"
+        android:text="@string/defaultName"
+        android:textSize="18sp" />
 
 </LinearLayout>
