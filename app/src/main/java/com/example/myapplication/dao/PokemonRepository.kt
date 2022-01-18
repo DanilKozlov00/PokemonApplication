@@ -1,7 +1,7 @@
-package com.example.myapplication.Dao
+package com.example.myapplication.dao
 
 import androidx.paging.PagingSource
-import com.example.myapplication.Data.PokemonInfo
+import com.example.myapplication.data.PokemonInfo
 
 class PokemonRepository (private val pokemonInfoDao: PokemonInfoDao) {
 

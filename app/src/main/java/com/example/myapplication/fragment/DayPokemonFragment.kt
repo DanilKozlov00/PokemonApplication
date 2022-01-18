@@ -9,10 +9,10 @@ import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.myapplication.Api.PokemonInstance
-import com.example.myapplication.Api.PokemonService
-import com.example.myapplication.Data.PokemonInfo
-import com.example.myapplication.Paging.Model.PokemonFavoriteViewModel
+import com.example.myapplication.api.PokemonInstance
+import com.example.myapplication.api.PokemonService
+import com.example.myapplication.data.PokemonInfo
+import com.example.myapplication.paging.model.PokemonFavoriteViewModel
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.fragment_day_pokemon.*
 import kotlinx.coroutines.Dispatchers

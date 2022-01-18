@@ -1,9 +1,9 @@
-package com.example.myapplication.Paging
+package com.example.myapplication.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.myapplication.Api.PokemonService
-import com.example.myapplication.Data.Result
+import com.example.myapplication.api.PokemonService
+import com.example.myapplication.data.Result
 import java.io.IOException
 
 class PokemonPaggingSource(val apiService: PokemonService) : PagingSource<Int, Result>() {

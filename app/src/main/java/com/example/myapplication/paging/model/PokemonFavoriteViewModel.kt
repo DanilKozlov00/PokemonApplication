@@ -1,4 +1,4 @@
-package com.example.myapplication.Paging.Model
+package com.example.myapplication.paging.model
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,9 +7,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.myapplication.Dao.AppDataBase
-import com.example.myapplication.Dao.PokemonRepository
-import com.example.myapplication.Data.PokemonInfo
+import com.example.myapplication.dao.AppDataBase
+import com.example.myapplication.dao.PokemonRepository
+import com.example.myapplication.data.PokemonInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

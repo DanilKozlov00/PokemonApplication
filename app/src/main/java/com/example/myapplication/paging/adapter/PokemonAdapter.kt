@@ -1,4 +1,4 @@
-package com.example.myapplication.Paging.Adapter
+package com.example.myapplication.paging.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.Data.Result
+import com.example.myapplication.data.Result
 import com.example.myapplication.R
 
 class PokemonAdapter :

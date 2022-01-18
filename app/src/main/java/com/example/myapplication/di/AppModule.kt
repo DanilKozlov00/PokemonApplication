@@ -4,8 +4,8 @@ package com.example.myapplication.di
 
 import android.app.Application
 import android.content.Context
-import com.example.myapplication.Dao.AppDataBase
-import com.example.myapplication.Dao.PokemonInfoDao
+import com.example.myapplication.dao.AppDataBase
+import com.example.myapplication.dao.PokemonInfoDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

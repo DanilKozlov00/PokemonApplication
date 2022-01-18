@@ -1,4 +1,4 @@
-package com.example.myapplication.Paging.Model
+package com.example.myapplication.paging.model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,10 +6,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.myapplication.Api.PokemonInstance
-import com.example.myapplication.Api.PokemonService
-import com.example.myapplication.Data.Result
-import com.example.myapplication.Paging.PokemonPaggingSource
+import com.example.myapplication.api.PokemonInstance
+import com.example.myapplication.api.PokemonService
+import com.example.myapplication.data.Result
+import com.example.myapplication.paging.PokemonPaggingSource
 import kotlinx.coroutines.flow.Flow
 
 class MainActivityViewModel : ViewModel() {

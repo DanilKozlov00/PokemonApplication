@@ -1,4 +1,4 @@
-package com.example.myapplication.Data
+package com.example.myapplication.data
 
 data class Result(
 

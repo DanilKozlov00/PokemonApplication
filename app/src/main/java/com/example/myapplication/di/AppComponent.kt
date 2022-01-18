@@ -1,6 +1,6 @@
 package com.example.myapplication.di
 
-import com.example.myapplication.Paging.Model.PokemonFavoriteViewModel
+import com.example.myapplication.paging.model.PokemonFavoriteViewModel
 import dagger.Component
 import javax.inject.Singleton
 

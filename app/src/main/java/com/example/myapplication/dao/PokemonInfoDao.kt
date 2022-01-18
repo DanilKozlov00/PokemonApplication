@@ -1,10 +1,9 @@
-package com.example.myapplication.Dao
+package com.example.myapplication.dao
 
 
-import androidx.paging.DataSource
 import androidx.paging.PagingSource
 import androidx.room.*
-import com.example.myapplication.Data.PokemonInfo
+import com.example.myapplication.data.PokemonInfo
 
 @Dao
 interface PokemonInfoDao {

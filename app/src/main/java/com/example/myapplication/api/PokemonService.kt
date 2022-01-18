@@ -1,7 +1,7 @@
-package com.example.myapplication.Api
+package com.example.myapplication.api
 
-import com.example.myapplication.Data.Pokemon
-import com.example.myapplication.Data.PokemonInfo
+import com.example.myapplication.data.Pokemon
+import com.example.myapplication.data.PokemonInfo
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

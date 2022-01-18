@@ -11,10 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.Paging.Adapter.FavoritePokemonAdapter
-import com.example.myapplication.Paging.Adapter.PokemonAdapter
-import com.example.myapplication.Paging.Model.MainActivityViewModel
-import com.example.myapplication.Paging.Model.PokemonFavoriteViewModel
+import com.example.myapplication.paging.adapter.FavoritePokemonAdapter
+import com.example.myapplication.paging.adapter.PokemonAdapter
+import com.example.myapplication.paging.model.MainActivityViewModel
+import com.example.myapplication.paging.model.PokemonFavoriteViewModel
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.fragment_pokemon_list.*
 import kotlinx.coroutines.Dispatchers
