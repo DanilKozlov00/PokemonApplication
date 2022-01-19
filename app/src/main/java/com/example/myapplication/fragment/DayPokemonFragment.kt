@@ -72,8 +72,10 @@ class DayPokemonFragment : DialogFragment(R.layout.fragment_day_pokemon) {
 
         GlobalScope.launch(Dispatchers.IO) {
             var id = randomId()
-            while (viewModel.getById(id) != null) {
+            var pokemon = viewModel.getById(id)
+            while (pokemon!=null && !pokemon.favorite) {
                 id = randomId()
+                pokemon = viewModel.getById(id)
             }
             pokemon = pokemonService.getSinglePokemon(id)
 

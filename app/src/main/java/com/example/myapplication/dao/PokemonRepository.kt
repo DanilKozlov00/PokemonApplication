@@ -18,7 +18,7 @@ class PokemonRepository (private val pokemonInfoDao: PokemonInfoDao) {
         pokemonInfoDao.insert(pokemonInfo)
     }
 
-    fun getById (id : Int) : PokemonInfo {
+    fun getById (id : Int) : PokemonInfo? {
        return pokemonInfoDao.getById(id)
     }
 

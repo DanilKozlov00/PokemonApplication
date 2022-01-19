@@ -44,7 +44,7 @@ class PokemonFavoriteViewModel constructor(application: Application) :
         }
     }
 
-    fun getById(id: Int) : PokemonInfo {
+    fun getById(id: Int) : PokemonInfo? {
         return repo.getById(id)
     }
 

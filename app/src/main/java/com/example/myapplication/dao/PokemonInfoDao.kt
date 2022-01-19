@@ -18,7 +18,7 @@ interface PokemonInfoDao {
         fun getAllPagedFavorite(fav : Boolean ): PagingSource<Int, PokemonInfo>
 
         @Query("SELECT * FROM POKEMON_ENTITY WHERE id = :id")
-        fun getById(id: Int): PokemonInfo
+        fun getById(id: Int): PokemonInfo?
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         fun insert(pokemon: PokemonInfo)

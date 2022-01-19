@@ -109,7 +109,7 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
         viewModel = ViewModelProvider(this).get(PokemonFavoriteViewModel::class.java)
 
         if (viewModel.getById(id) != null) {
-            pokemon = viewModel.getById(id)
+            pokemon = viewModel.getById(id)!!
         }
         var init: Boolean = false
         if (this::pokemon.isInitialized) {
