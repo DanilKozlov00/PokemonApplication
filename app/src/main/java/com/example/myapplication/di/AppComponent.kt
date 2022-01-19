@@ -10,7 +10,7 @@ import javax.inject.Singleton
 interface AppComponent {
 
 
-    fun inject(pokemoActivityViewModel: PokemonFavoriteViewModel) {
+    fun inject(pokemonActivityViewModel: PokemonFavoriteViewModel) {
 
     }
 }

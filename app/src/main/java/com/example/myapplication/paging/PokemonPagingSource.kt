@@ -6,7 +6,7 @@ import com.example.myapplication.api.PokemonService
 import com.example.myapplication.data.Result
 import java.io.IOException
 
-class PokemonPaggingSource(val apiService: PokemonService) : PagingSource<Int, Result>() {
+class PokemonPagingSource(val apiService: PokemonService) : PagingSource<Int, Result>() {
 
 
     override fun getRefreshKey(state: PagingState<Int, Result>): Int? {

@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.myapplication.api.PokemonInstance
+import com.example.myapplication.api.PokemonController
 import com.example.myapplication.api.PokemonService
 import com.example.myapplication.data.PokemonInfo
 import com.example.myapplication.paging.model.PokemonFavoriteViewModel
@@ -64,7 +64,7 @@ class DayPokemonFragment : DialogFragment(R.layout.fragment_day_pokemon) {
     @SuppressLint("SetTextI18n")
     private fun getCurrentData() {
 
-        val pokemonService: PokemonService = PokemonInstance.getPokemonInstance().create(
+        val pokemonService: PokemonService = PokemonController.getPokemonInstance().create(
             PokemonService::class.java
         )
 
