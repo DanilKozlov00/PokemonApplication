@@ -3,15 +3,16 @@ package com.example.myapplication.fragment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.myapplication.R
 import com.example.myapplication.api.PokemonController
 import com.example.myapplication.api.PokemonService
 import com.example.myapplication.data.PokemonInfo
 import com.example.myapplication.paging.model.PokemonFavoriteViewModel
-import com.example.myapplication.R
 import kotlinx.android.synthetic.main.fragment_pokemon_info.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -25,6 +26,7 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
     companion object {
         const val pokemonUrl = "pokemonUrl"
         const val pokemonId = "pokemonId"
+        const val maxStats = 300
     }
 
     lateinit var pokemon: PokemonInfo
@@ -87,15 +89,14 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
             pokemonInfoUserParams.visibility = View.GONE
         }
 
-
     }
 
 
     private fun generateStats(pokemonInfo: PokemonInfo) {
-        pokemonInfo.hp = Random.nextInt(300)
-        pokemonInfo.attack = Random.nextInt(300)
-        pokemonInfo.defense = Random.nextInt(300)
-        pokemonInfo.speed = Random.nextInt(300)
+        pokemonInfo.hp = Random.nextInt(maxStats)
+        pokemonInfo.attack = Random.nextInt(maxStats)
+        pokemonInfo.defense = Random.nextInt(maxStats)
+        pokemonInfo.speed = Random.nextInt(maxStats)
     }
 
 
@@ -121,6 +122,21 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
 
             generateStats(pokemon)
 
+            val statsList = arrayOf(
+                "HP ${pokemon.hp}/$maxStats",
+                "ATK ${pokemon.attack}/$maxStats",
+                "DEF ${pokemon.defense}/$maxStats",
+                "SPD ${pokemon.speed}/$maxStats"
+            )
+
+            val adapter: ArrayAdapter<String> = ArrayAdapter(
+                view?.context!!,
+                android.R.layout.simple_list_item_1, statsList
+            )
+
+
+
+
             withContext(Dispatchers.Main) {
 
                 if (pokemon.userParams != null) {
@@ -130,6 +146,9 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
                 if (pokemon.favorite) {
                     favoriteBtn.setBackgroundResource(R.drawable.favorite_star)
                 }
+
+                pokemonInfoStatsList.adapter = adapter
+
 
                 pokemonInfoName.text = pokemon.name
                 pokemonInfoWeight.text = "Weight " + pokemon.weight / 10 + "kg"
