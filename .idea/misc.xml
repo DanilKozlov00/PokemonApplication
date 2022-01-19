@@ -18,6 +18,7 @@
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/drawable/edit_icon.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/drawable/favorite_star.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/drawable/ic_baseline_star_outline_24.xml" value="0.221875" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/drawable/no_favorite_star.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/drawable/unfavorite_star.xml" value="0.3828125" />
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/activity_main.xml" value="0.20572916666666666" />
@@ -26,6 +27,8 @@
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/fragment_pokemon_info.xml" value="0.67" />
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/fragment_pokemon_list.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/pokemon_item.xml" value="0.35520833333333335" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.24114583333333334" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.24114583333333334" />
       </map>
     </option>
   </component>
