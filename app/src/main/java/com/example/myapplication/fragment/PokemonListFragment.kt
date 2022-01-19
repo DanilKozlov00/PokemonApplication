@@ -11,11 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.R
 import com.example.myapplication.paging.adapter.FavoritePokemonAdapter
 import com.example.myapplication.paging.adapter.PokemonAdapter
 import com.example.myapplication.paging.model.MainActivityViewModel
 import com.example.myapplication.paging.model.PokemonFavoriteViewModel
-import com.example.myapplication.R
 import kotlinx.android.synthetic.main.fragment_pokemon_list.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -59,7 +59,6 @@ class PokemonListFragment : Fragment(R.layout.fragment_pokemon_list) {
     }
 
 
-
     private fun initFavoriteListRecyclerView() {
         fvRecyclerView.apply {
             layoutManager =
@@ -69,11 +68,12 @@ class PokemonListFragment : Fragment(R.layout.fragment_pokemon_list) {
             addItemDecoration(decoration)
 
             favoriteViewAdapter = FavoritePokemonAdapter()
-            favoriteViewAdapter.setOnItemClickListener(object : FavoritePokemonAdapter.onItemClickListener {
+            favoriteViewAdapter.setOnItemClickListener(object :
+                FavoritePokemonAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
                     findNavController().navigate(
                         R.id.action_pokemonList_to_pokemonInfoFragment,
-                        bundleOf(PokemonInfoFragment.pokemonId to favoriteViewAdapter.peek(position)?.id.toString())
+                        bundleOf(PokemonInfoFragment.pokemonId to favoriteViewAdapter.peek(position)?.id)
                     )
                 }
             })

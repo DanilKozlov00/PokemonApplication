@@ -38,7 +38,7 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
                 arguments?.getString(pokemonUrl).toString().substringAfter("pokemon")
                     .replace("/", "").toInt()
             } else {
-                arguments?.getString(pokemonId)?.toInt()
+                arguments?.getInt(pokemonId)
             }
 
         if (id != null) {
