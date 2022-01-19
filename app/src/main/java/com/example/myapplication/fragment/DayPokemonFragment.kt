@@ -29,6 +29,7 @@ class DayPokemonFragment : DialogFragment(R.layout.fragment_day_pokemon) {
     }
 
     lateinit var pokemon: PokemonInfo
+    private lateinit var viewModel : PokemonFavoriteViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,14 +69,14 @@ class DayPokemonFragment : DialogFragment(R.layout.fragment_day_pokemon) {
             PokemonService::class.java
         )
 
-        val viewModel = ViewModelProvider(this).get(PokemonFavoriteViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PokemonFavoriteViewModel::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
             var id = randomId()
-            var pokemon = viewModel.getById(id)
-            while (pokemon!=null && !pokemon.favorite) {
+            var currentPokemon = viewModel.getById(id)
+            while (currentPokemon!=null && !currentPokemon.favorite) {
                 id = randomId()
-                pokemon = viewModel.getById(id)
+                currentPokemon = viewModel.getById(id)
             }
             pokemon = pokemonService.getSinglePokemon(id)
 
