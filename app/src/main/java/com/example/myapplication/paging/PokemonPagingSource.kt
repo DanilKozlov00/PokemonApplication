@@ -24,8 +24,8 @@ class PokemonPagingSource(val apiService: PokemonService) : PagingSource<Int, Re
 
             LoadResult.Page(
                 data = filteredData,
-                prevKey = if (offset == 1) null else offset - loadSize,
-                nextKey = if (data.next == null) null else offset + loadSize
+                prevKey = if (offset == 0) null else offset - loadSize,
+                nextKey = offset + loadSize
             )
         } catch (t: Throwable) {
             var exception = t
