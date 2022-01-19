@@ -21,9 +21,9 @@
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/drawable/no_favorite_star.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/drawable/unfavorite_star.xml" value="0.3828125" />
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/activity_main.xml" value="0.20572916666666666" />
-        <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/fragment_day_pokemon.xml" value="0.23822463768115942" />
-        <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/fragment_pokemon_favorite.xml" value="0.35520833333333335" />
-        <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/fragment_pokemon_info.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/fragment_day_pokemon.xml" value="0.33" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/fragment_pokemon_favorite.xml" value="0.9" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/fragment_pokemon_info.xml" value="0.67" />
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/fragment_pokemon_list.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/Admin/Documents/GitHub/PokemonApplication/app/src/main/res/layout/pokemon_item.xml" value="0.35520833333333335" />
       </map>

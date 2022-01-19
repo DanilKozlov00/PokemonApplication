@@ -65,26 +65,26 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
 
         val changeButton = view.findViewById<Button>(R.id.changeInfoBtn)
         changeButton.setOnClickListener {
-            if (userParams.isEnabled) {
-                userParams.isEnabled = false
+            if (pokemonInfoUserParams.isEnabled) {
+                pokemonInfoUserParams.isEnabled = false
                 changeButton.setBackgroundResource(R.drawable.edit_icon)
-                if (userParams.text.isEmpty()) {
-                    userParamLayout.visibility = View.GONE
+                if (pokemonInfoUserParams.text.isEmpty()) {
+                    pokemonInfoUserParams.visibility = View.GONE
                 } else {
-                    pokemon.userParams = userParams.text.toString()
+                    pokemon.userParams = pokemonInfoUserParams.text.toString()
                     viewModel.insert(pokemon)
                 }
             } else {
-                userParamLayout.visibility = View.VISIBLE
-                userParams.isEnabled = true
-                userParams.isFocusable = true
+                pokemonInfoUserParams.visibility = View.VISIBLE
+                pokemonInfoUserParams.isEnabled = true
+                pokemonInfoUserParams.isFocusable = true
 
                 changeButton.setBackgroundResource(R.drawable.done_icon)
             }
         }
 
-        if (userParams.text.isEmpty()) {
-            userParamLayout.visibility = View.GONE
+        if (pokemonInfoUserParams.text.isEmpty()) {
+            pokemonInfoUserParams.visibility = View.GONE
         }
 
 
@@ -124,36 +124,22 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
             withContext(Dispatchers.Main) {
 
                 if (pokemon.userParams != null) {
-                    userParamLayout.visibility = View.VISIBLE
-                    userParams.setText(pokemon.userParams)
+                    pokemonInfoUserParams.visibility = View.VISIBLE
+                    pokemonInfoUserParams.setText(pokemon.userParams)
                 }
                 if (pokemon.favorite) {
                     favoriteBtn.setBackgroundResource(R.drawable.favorite_star)
                 }
 
-
-
-                progressViewHp.labelText = "${pokemon.hp}/300"
-                progressViewHp.progress = pokemon.hp!!.toFloat()
-                progressViewAtk.labelText = "${pokemon.attack}/300"
-                progressViewAtk.progress = pokemon.attack!!.toFloat()
-                progressViewDef.labelText = "${pokemon.defense}/300"
-                progressViewDef.progress = pokemon.defense!!.toFloat()
-                progressViewSpd.labelText = "${pokemon.speed}/300"
-                progressViewSpd.progress = pokemon.speed!!.toFloat()
-                progressViewExp.labelText = "${pokemon.base_experience}/300"
-                progressViewExp.progress = pokemon.base_experience.toFloat()
-
-
                 pokemonInfoName.text = pokemon.name
-                weight.text = "Weight " + pokemon.weight / 10 + "kg"
-                height.text = "Height " + (pokemon.height.toDouble() / 10) + "m"
-                base_experience.text = "Exp " + pokemon.base_experience
+                pokemonInfoWeight.text = "Weight " + pokemon.weight / 10 + "kg"
+                pokemonInfoHeight.text = "Height " + (pokemon.height.toDouble() / 10) + "m"
+                pokemonInfoExp.text = "Exp " + pokemon.base_experience
 
-                Glide.with(imageInfo)
+                Glide.with(pokemonInfoImage)
                     .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png")
                     .circleCrop()
-                    .into(imageInfo)
+                    .into(pokemonInfoImage)
             }
         }
     }

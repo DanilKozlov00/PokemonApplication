@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">My Application</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_to_favorite">Add to favorite</string>
     <string name="defaultName">Pikachu</string>
+    <string name="height">Height</string>
+    <string name="exp">Exp</string>
+    <string name="weight">Weight</string>
+    <string name="base_stats">Base Stats</string>
+    <string name="add_your_comment">Add your comment</string>
 
 </resources>

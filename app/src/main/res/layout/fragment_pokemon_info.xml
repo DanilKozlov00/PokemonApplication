@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,320 +8,110 @@
     android:orientation="vertical"
     tools:context="com.example.myapplication.fragment.PokemonInfoFragment">
 
+    <TextView
+        android:id="@+id/pokemonInfoName"
+        style="@style/TextStyle"
+        android:layout_width="290dp"
+        android:layout_height="50dp"
+        android:text="@string/defaultName"
+        app:layout_constraintBottom_toTopOf="@+id/pokemonInfoImage"
+        app:layout_constraintEnd_toStartOf="@+id/favoriteBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/favoriteBtn"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:background="@drawable/no_favorite_star"
+        app:layout_constraintBottom_toTopOf="@+id/pokemonInfoExp"
+        app:layout_constraintEnd_toStartOf="@+id/changeInfoBtn"
+        app:layout_constraintStart_toEndOf="@+id/pokemonInfoName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/changeInfoBtn"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_icon"
+        app:layout_constraintBottom_toTopOf="@+id/pokemonInfoExp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/favoriteBtn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/pokemonInfoImage"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:background="@drawable/all_circle_white_bg"
+        app:layout_constraintBottom_toTopOf="@+id/pokemonInfoUserParams"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonInfoName" />
+
+    <TextView
+        android:id="@+id/pokemonInfoWeight"
+        style="@style/TextStyle"
+        android:layout_width="170dp"
+        android:layout_height="80dp"
+        android:text="@string/weight"
+        app:layout_constraintBottom_toTopOf="@+id/pokemonInfoUserParams"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pokemonInfoImage"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonInfoHeight" />
+
+    <TextView
+        android:id="@+id/pokemonInfoHeight"
+        style="@style/TextStyle"
+        android:layout_width="170dp"
+        android:layout_height="80dp"
+        android:text="@string/height"
+        app:layout_constraintBottom_toTopOf="@+id/pokemonInfoWeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pokemonInfoImage"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonInfoExp" />
+
+    <TextView
+        android:id="@+id/pokemonInfoExp"
+        style="@style/TextStyle"
+        android:layout_width="170dp"
+        android:layout_height="80dp"
+        android:text="@string/exp"
+        app:layout_constraintBottom_toTopOf="@+id/pokemonInfoHeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pokemonInfoImage"
+        app:layout_constraintTop_toBottomOf="@+id/favoriteBtn" />
+
+    <EditText
+        android:id="@+id/pokemonInfoUserParams"
+        style="@style/TextStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.98"
-        android:orientation="horizontal">
+        android:layout_height="100dp"
+        android:enabled="false"
+        android:hint="@string/add_your_comment"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/pokemonInfoBaseStatsText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonInfoImage" />
 
-        <TextView
-            android:id="@+id/pokemonInfoName"
-            style="@style/TextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:gravity="center"
-            android:text="@string/defaultName"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/favoriteBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-
-            android:background="@drawable/no_favorite_star" />
-
-        <Button
-            android:id="@+id/changeInfoBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/edit_icon" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/pokemonInfoBaseStatsText"
+        style="@style/TextStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.75"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:text="@string/base_stats"
+        app:layout_constraintBottom_toTopOf="@+id/pokemonInfoStatsList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonInfoUserParams" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageInfo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/all_circle_white_bg" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/base_experience"
-                style="@style/TextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Exp 100"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/height"
-                style="@style/TextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Height 5m"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/weight"
-                style="@style/TextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Weight 10kg"
-                android:textSize="20sp"
-                android:textStyle="bold">
-
-            </TextView>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/userParamLayout"
+    <ListView
+        android:id="@+id/pokemonInfoStatsList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.97"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemonInfoBaseStatsText" />
 
-        <EditText
-            android:id="@+id/userParams"
-            style="@style/TextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:enabled="false"
-            android:hint="Add your comment" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.6"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            tools:ignore="NestedWeights">
-
-            <TextView
-                style="@style/TextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Base Stats"
-                android:textColor="@color/white_93"
-                android:textSize="21sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-
-            <TextView
-                android:id="@+id/atk"
-                style="@style/TextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:gravity="center"
-                android:text="ATK"
-                android:textColor="@color/white_70" />
-
-            <com.skydoves.progressview.ProgressView
-                android:id="@+id/progressViewAtk"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                app:progressView_autoAnimate="true"
-                app:progressView_colorBackground="@color/white"
-                app:progressView_colorProgress="@color/flying"
-                app:progressView_labelColorInner="@color/white"
-                app:progressView_labelColorOuter="@color/black"
-                app:progressView_labelSize="12sp"
-                app:progressView_max="300"
-                app:progressView_radius="12dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-
-            <TextView
-                android:id="@+id/hp"
-                style="@style/TextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:gravity="center"
-                android:text="HP"
-                android:textColor="@color/white_70" />
-
-            <com.skydoves.progressview.ProgressView
-                android:id="@+id/progressViewHp"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                app:progressView_autoAnimate="true"
-                app:progressView_colorBackground="@color/white"
-                app:progressView_colorProgress="@color/flying"
-                app:progressView_labelColorInner="@color/white"
-                app:progressView_labelColorOuter="@color/black"
-                app:progressView_labelSize="12sp"
-                app:progressView_max="300"
-                app:progressView_radius="12dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-
-            <TextView
-                android:id="@+id/def"
-                style="@style/TextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:gravity="center"
-                android:text="DEF"
-                android:textColor="@color/white_70" />
-
-            <com.skydoves.progressview.ProgressView
-                android:id="@+id/progressViewDef"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                app:progressView_autoAnimate="true"
-                app:progressView_colorBackground="@color/white"
-                app:progressView_colorProgress="@color/flying"
-                app:progressView_labelColorInner="@color/white"
-                app:progressView_labelColorOuter="@color/black"
-                app:progressView_labelSize="12sp"
-                app:progressView_max="300"
-                app:progressView_radius="12dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-
-            <TextView
-                android:id="@+id/spd"
-                style="@style/TextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:gravity="center"
-                android:text="SPD"
-                android:textColor="@color/white_70" />
-
-            <com.skydoves.progressview.ProgressView
-                android:id="@+id/progressViewSpd"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                app:progressView_autoAnimate="true"
-                app:progressView_colorBackground="@color/white"
-                app:progressView_colorProgress="@color/flying"
-                app:progressView_labelColorInner="@color/white"
-                app:progressView_labelColorOuter="@color/black"
-                app:progressView_labelSize="12sp"
-                app:progressView_max="300"
-                app:progressView_radius="12dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-
-            <TextView
-                android:id="@+id/exp"
-                style="@style/TextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:gravity="center"
-                android:text="EXP"
-                android:textColor="@color/white_70" />
-
-            <com.skydoves.progressview.ProgressView
-                android:id="@+id/progressViewExp"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                app:progressView_autoAnimate="true"
-                app:progressView_colorBackground="@color/white"
-                app:progressView_colorProgress="@color/flying"
-                app:progressView_labelColorInner="@color/white"
-                app:progressView_labelColorOuter="@color/black"
-                app:progressView_labelSize="12sp"
-                app:progressView_max="300"
-                app:progressView_radius="12dp" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
