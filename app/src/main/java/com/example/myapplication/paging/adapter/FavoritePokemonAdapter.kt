@@ -2,18 +2,15 @@ package com.example.myapplication.paging.adapter
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.myapplication.data.PokemonInfo
-import com.example.myapplication.R
+import com.example.myapplication.databinding.FragmentPokemonFavoriteBinding
 
 class FavoritePokemonAdapter :
-    PagingDataAdapter<PokemonInfo, FavoritePokemonAdapter.PersonViewHolder>(PersonDiffCallback()) {
+    PagingDataAdapter<PokemonInfo, FavoritePokemonAdapter.FavoriteViewHolder>(PersonDiffCallback()) {
 
 
     private lateinit var mListener: onItemClickListener
@@ -27,40 +24,33 @@ class FavoritePokemonAdapter :
     }
 
 
-    override fun onBindViewHolder(holderPerson: PersonViewHolder, position: Int) {
-        var person = getItem(position)
-
-        if (person != null) {
-            holderPerson.bind(person)
-        }
-
+    override fun onBindViewHolder(holderFavorite: FavoriteViewHolder, position: Int) {
+        holderFavorite.bind(getItem(position)!!)
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): FavoritePokemonAdapter.PersonViewHolder {
-        val inflater =
-            LayoutInflater.from(parent.context).inflate(R.layout.fragment_pokemon_favorite, parent, false)
-
-        return FavoritePokemonAdapter.PersonViewHolder(inflater, mListener)
+    ): FavoritePokemonAdapter.FavoriteViewHolder {
+        return FavoritePokemonAdapter.FavoriteViewHolder(
+            FragmentPokemonFavoriteBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            ), mListener
+        )
     }
 
 
-    class PersonViewHolder(view: View, listener: FavoritePokemonAdapter.onItemClickListener) :
-        RecyclerView.ViewHolder(view) {
-
-        val imageView: ImageView = view.findViewById(R.id.favoritePokemonImageView)
+    class FavoriteViewHolder(
+        private val binding: FragmentPokemonFavoriteBinding,
+        listener: FavoritePokemonAdapter.onItemClickListener
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: PokemonInfo) {
-            Glide.with(imageView)
-                .load(getPicUrl(data.id))
-                .circleCrop()
-                .into(imageView)
-        }
-
-        fun getPicUrl(id: Int): String {
-            return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png"
+            binding.pokemon = data
+            data.pokemonImage = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png"
         }
 
         init {

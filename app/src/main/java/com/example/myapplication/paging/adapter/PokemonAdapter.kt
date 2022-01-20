@@ -1,16 +1,14 @@
 package com.example.myapplication.paging.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+
 import com.example.myapplication.data.Result
-import com.example.myapplication.R
+
+import com.example.myapplication.databinding.PokemonItemBinding
 
 class PokemonAdapter :
     PagingDataAdapter<Result, PokemonAdapter.MyViewHolder>(DiffUtilCallBack()) {
@@ -27,32 +25,28 @@ class PokemonAdapter :
 
     override fun onBindViewHolder(holder: PokemonAdapter.MyViewHolder, position: Int) {
         holder.bind(getItem(position)!!)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonAdapter.MyViewHolder {
-        val inflater =
-            LayoutInflater.from(parent.context).inflate(R.layout.pokemon_item, parent, false)
-
-        return MyViewHolder(inflater, mListener)
+        return MyViewHolder(
+            PokemonItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            ), mListener
+        )
     }
 
 
-    class MyViewHolder(view: View, listener: onItemClickListener) : RecyclerView.ViewHolder(view) {
-
-        val imageView: ImageView = view.findViewById(R.id.imageView)
-        val pokemonName: TextView = view.findViewById(R.id.pokemonName)
+    class MyViewHolder(private val binding: PokemonItemBinding, listener: onItemClickListener) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: Result) {
-            pokemonName.text = data.name
-            val id = data.url.substringAfter("pokemon").replace("/", "").toInt()
-            Glide.with(imageView)
-                .load(getPicUrl(id))
-                .circleCrop()
-                .into(imageView)
-        }
-
-        fun getPicUrl(id: Int): String {
-            return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png"
+            binding.pokemonResult = data
+            val index = data.url.split("/".toRegex()).dropLast(1).last()
+            data.pokemonImage =
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$index.png"
         }
 
         init {

@@ -1,24 +1,19 @@
 package com.example.myapplication.fragment
 
-import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
+import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
-import com.example.myapplication.api.PokemonController
-import com.example.myapplication.api.PokemonService
-import com.example.myapplication.data.PokemonInfo
-import com.example.myapplication.paging.model.PokemonFavoriteViewModel
 import com.example.myapplication.R
-import kotlinx.android.synthetic.main.fragment_day_pokemon.*
+import com.example.myapplication.databinding.FragmentDayPokemonBinding
+import com.example.myapplication.paging.model.PokemonFavoriteViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class DayPokemonFragment : DialogFragment(R.layout.fragment_day_pokemon) {
@@ -28,32 +23,35 @@ class DayPokemonFragment : DialogFragment(R.layout.fragment_day_pokemon) {
         var isShow: Boolean = false
     }
 
-    lateinit var pokemon: PokemonInfo
-    private lateinit var viewModel : PokemonFavoriteViewModel
+    private var viewBinding: FragmentDayPokemonBinding? = null
+    private lateinit var viewModel: PokemonFavoriteViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getCurrentData()
-        val button = view.findViewById<Button>(R.id.addToFavoriteBtn)
-        button.setOnClickListener {
-            val viewModel = ViewModelProvider(this).get(PokemonFavoriteViewModel::class.java)
-            pokemon.favorite = true
-            if (viewModel.getById(pokemon.id) != null) {
-                viewModel.update(pokemon)
-            } else {
-                viewModel.insert(pokemon)
-            }
-            dialog?.dismiss()
+        viewModel = ViewModelProvider(this).get(PokemonFavoriteViewModel::class.java)
+
+        GlobalScope.launch(Dispatchers.IO) {
+            viewBinding!!.pokemon = viewModel.getPokemon()
+            viewBinding!!.viewModel = viewModel
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val myView = super.onCreateView(inflater, container, savedInstanceState)!!
+        viewBinding = FragmentDayPokemonBinding.bind(myView)
+        return myView
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setWidthPercent(85)
     }
 
-    fun DialogFragment.setWidthPercent(percentage: Int) {
+    private fun DialogFragment.setWidthPercent(percentage: Int) {
         val percent = percentage.toFloat() / 100
         val dm = Resources.getSystem().displayMetrics
         val rect = dm.run { Rect(0, 0, widthPixels, heightPixels) }
@@ -61,44 +59,9 @@ class DayPokemonFragment : DialogFragment(R.layout.fragment_day_pokemon) {
         dialog?.window?.setLayout(percentWidth.toInt(), (percentWidth.toInt() * 1.5).toInt())
     }
 
-
-    @SuppressLint("SetTextI18n")
-    private fun getCurrentData() {
-
-        val pokemonService: PokemonService = PokemonController.getPokemonInstance().create(
-            PokemonService::class.java
-        )
-
-        viewModel = ViewModelProvider(this).get(PokemonFavoriteViewModel::class.java)
-
-        GlobalScope.launch(Dispatchers.IO) {
-            var id = randomId()
-            var currentPokemon = viewModel.getById(id)
-            while (currentPokemon!=null && !currentPokemon.favorite) {
-                id = randomId()
-                currentPokemon = viewModel.getById(id)
-            }
-            pokemon = pokemonService.getSinglePokemon(id)
-
-
-
-            withContext(Dispatchers.Main) {
-                pokemonDayName.text = pokemon.name
-                pokemonWeight.text = "Weight " + pokemon.weight / 10 + "kg"
-                pokemonHeight.text = "Height " + (pokemon.height.toDouble() / 10) + "m"
-                pokemonExp.text = "Exp " + pokemon.base_experience
-
-                Glide.with(pokemonDayImage)
-                    .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png")
-                    .circleCrop()
-                    .into(pokemonDayImage)
-            }
-        }
-    }
-
-
-    private fun randomId(): Int {
-        return (0..898).random()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewBinding = null
     }
 
 }

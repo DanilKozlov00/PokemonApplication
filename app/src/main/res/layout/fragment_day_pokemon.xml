@@ -1,79 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/background"
-    tools:context="com.example.myapplication.fragment.DayPokemonFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/pokemonDayName"
-        style="@style/TextStyle"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.myapplication.paging.model.PokemonFavoriteViewModel" />
+
+        <variable
+            name="pokemon"
+            type="com.example.myapplication.data.PokemonInfo" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/defaultName"
-        app:layout_constraintBottom_toTopOf="@+id/pokemonDayImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/background"
+        tools:context="com.example.myapplication.fragment.DayPokemonFragment">
 
-    <ImageView
-        android:id="@+id/pokemonDayImage"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/all_circle_white_bg"
-        app:layout_constraintBottom_toTopOf="@+id/pokemonWeight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemonDayName" />
+        <TextView
+            android:id="@+id/pokemonDayName"
+            style="@style/TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{pokemon.name}"
+            app:layout_constraintBottom_toTopOf="@+id/pokemonDayImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/pokemonWeight"
-        style="@style/TextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/weight"
-        app:layout_constraintBottom_toTopOf="@+id/pokemonHeight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemonDayImage" />
+        <ImageView
+            android:id="@+id/pokemonDayImage"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_margin="10dp"
+            app:pokemonImage="@{pokemon.pokemonImage}"
+            android:background="@drawable/all_circle_white_bg"
+            app:layout_constraintBottom_toTopOf="@+id/pokemonWeight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonDayName" />
 
-    <TextView
-        android:id="@+id/pokemonHeight"
-        style="@style/TextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/height"
-        app:layout_constraintBottom_toTopOf="@+id/pokemonExp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemonWeight" />
+        <TextView
+            android:id="@+id/pokemonWeight"
+            style="@style/TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{pokemon.weightString}"
+            app:layout_constraintBottom_toTopOf="@+id/pokemonHeight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonDayImage" />
 
-    <TextView
-        android:id="@+id/pokemonExp"
-        style="@style/TextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/exp"
-        app:layout_constraintBottom_toTopOf="@+id/addToFavoriteBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemonHeight" />
+        <TextView
+            android:id="@+id/pokemonHeight"
+            style="@style/TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{pokemon.heightString}"
+            app:layout_constraintBottom_toTopOf="@+id/pokemonExp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonWeight" />
 
-    <Button
-        android:id="@+id/addToFavoriteBtn"
-        style="@style/TextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/add_to_favorite"
-        android:textColor="@color/background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemonExp" />
+        <TextView
+            android:id="@+id/pokemonExp"
+            style="@style/TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{pokemon.expString}"
+            app:layout_constraintBottom_toTopOf="@+id/addToFavoriteBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonHeight" />
+
+        <Button
+            android:id="@+id/addToFavoriteBtn"
+            style="@style/TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="@{(v) -> viewModel.favoriteBtnClick(pokemon)}"
+            android:text="@string/add_to_favorite"
+            android:textColor="@color/background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemonExp" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
